@@ -1,0 +1,40 @@
+// Gradle equivalent of pom.xml.
+// Mirrors: groupId/artifactId/version, Java release 17, UTF-8 sources,
+// JUnit Jupiter 5.10.2 for tests, and tests run on the JUnit Platform (like Surefire).
+
+plugins {
+    id 'java'
+}
+
+group = 'pricing'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    // Needed by Gradle 8+ to launch JUnit 5 tests.
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17                 // <maven.compiler.release>17</maven.compiler.release>
+    options.encoding = 'UTF-8'           // <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat 'full'
+    }
+}
+
+jar {
+    archiveBaseName = 'order-pricing'
+    manifest {
+        attributes 'Main-Class': 'pricing.Main'
+    }
+}
