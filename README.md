@@ -4,16 +4,13 @@
 
 This is a skeleton project structure which will help you start solving the **Order Pricing** problem right away.
 
-It contains the existing production code (`Main.java` and `OrderProcessor.java`) and one example unit test. You can build and test it with **either Maven or Gradle**; use whichever you are more comfortable with.
+It contains the existing production code (`Main.java` and `OrderProcessor.java`) and one example unit test. The project is built and tested with **Maven**.
 
 ## Tools available to you
 
 - Java 17 (any JDK 17 or newer works)
 - Apache Maven 3.6+ (configured by `pom.xml`)
-- Gradle 8+ (configured by `build.gradle` and `settings.gradle`)
 - JUnit 5 (5.10.2), the unit testing framework used for writing and running tests
-
-You only need **one** of Maven or Gradle installed.
 
 ## Structure
 
@@ -26,51 +23,36 @@ You only need **one** of Maven or Gradle installed.
 │   └── test/java/pricing
 │       └── OrderProcessorTest.java  # One example test to start from.
 ├── pom.xml              # Maven build config
-├── build.gradle         # Gradle build config (equivalent to pom.xml)
-├── settings.gradle      # Gradle project name
 ├── run.sh               # Compile and run the program against inputs
 ├── run_unittests.sh     # Run all unit tests
-├── build_tool.sh        # Helper used by the scripts to pick Maven or Gradle
 ├── runner.json          # Used by the Geektrust IDE to check your output against the examples
 └── README.md
 ```
 
 - **src/main/java** is where your Java source files go. `Main.java` contains the driver code and must not be changed. You may change every other file.
-- **src/test/java** is where your unit tests go. Name test classes so that they end with `Test.java` (for example `OrderProcessorTest.java`, `CustomerTypeTest.java`) so both Maven and Gradle pick them up.
+- **src/test/java** is where your unit tests go. Name test classes so that they end with `Test.java` (for example `OrderProcessorTest.java`, `CustomerTypeTest.java`) so Maven picks them up.
 
 ## How to run the unit tests
-
-With Maven:
 
 ```bash
 mvn test
 ```
 
-With Gradle:
-
-```bash
-gradle test
-```
-
-Or use the script, which uses Maven if it is installed and Gradle otherwise:
+or
 
 ```bash
 ./run_unittests.sh
 ```
 
-Test reports are written to `target/surefire-reports/` (Maven) or `build/reports/tests/test/index.html` (Gradle).
+Test reports are written to `target/surefire-reports/`.
 
 ## How to build your solution
 
-With Maven, `mvn package` compiles the code, runs the tests and builds `target/order-pricing-1.0.0.jar`.
-
-With Gradle, `gradle build` compiles the code, runs the tests and builds `build/libs/order-pricing-1.0.0.jar`.
+`mvn package` compiles the code, runs the tests and builds `target/order-pricing-1.0.0.jar`.
 
 ## How to run the program
 
 The program takes **one** argument: the whole order as a single string. Always wrap it in single quotes so your shell passes it as one argument.
-
-Using the script (works with either build tool):
 
 ```bash
 ./run.sh 'Regular Electronics:100:1 Books:20:2'
@@ -86,41 +68,21 @@ You can pass several inputs at once; the program runs once for each:
 # INVALID CATEGORY
 ```
 
-Running directly after a Maven build:
+Running directly:
 
 ```bash
 mvn -q compile
 java -cp target/classes pricing.Main 'Regular Electronics:100:1 Books:20:2'
 ```
 
-Running directly after a Gradle build:
-
-```bash
-gradle -q classes
-java -cp build/classes/java/main pricing.Main 'Regular Electronics:100:1 Books:20:2'
-# or, using the jar from `gradle build`:
-java -jar build/libs/order-pricing-1.0.0.jar 'Regular Electronics:100:1 Books:20:2'
-```
-
-## Choosing the build tool for the scripts
-
-`run.sh` and `run_unittests.sh` use Maven when it is available and fall back to Gradle. To pick one explicitly, set `BUILD_TOOL`:
-
-```bash
-BUILD_TOOL=gradle ./run_unittests.sh
-BUILD_TOOL=maven ./run.sh 'VIP Electronics:200:1'
-```
-
-If you add a Maven wrapper (`mvnw`) or Gradle wrapper (`gradlew`) to the project, the scripts use the wrapper automatically.
-
 ## Commands available to you
 
-| Task | Maven | Gradle |
-|------|-------|--------|
-| Clean old builds | `mvn clean` | `gradle clean` |
-| Compile | `mvn compile` | `gradle classes` |
-| Run unit tests | `mvn test` | `gradle test` |
-| Build the jar | `mvn package` | `gradle build` |
+| Task | Command |
+|------|---------|
+| Clean old builds | `mvn clean` |
+| Compile | `mvn compile` |
+| Run unit tests | `mvn test` |
+| Build the jar | `mvn package` |
 
 ## Checking for correctness
 

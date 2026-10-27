@@ -4,8 +4,5 @@ README.md
 LICENSE
 run.sh
 run_unittests.sh
-build_tool.sh
 runner.json
 pom.xml
-build.gradle
-settings.gradle

@@ -5,10 +5,6 @@ out/
 bin/
 dist/
 
-# Gradle
-.gradle/
-!gradle/wrapper/gradle-wrapper.jar
-
 # Maven
 .mvn/timing.properties
 dependency-reduced-pom.xml
