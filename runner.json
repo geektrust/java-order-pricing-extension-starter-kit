@@ -1,12 +1,12 @@
 {
   "build": {
     "commands": [
-      "rm -rf out && javac -nowarn -d out $(find src/main/java -name '*.java')"
+      "mvn -q -B -DskipTests clean compile dependency:build-classpath -DincludeScope=runtime -Dmdep.outputFile=target/classpath.txt 2>&1"
     ],
-    "timeout": 20000
+    "timeout": 120000
   },
   "run": {
-    "command": "java -cp out pricing.Main",
+    "command": "java -cp \"target/classes:$(cat target/classpath.txt)\" pricing.Main",
     "timeout": 10000
   }
 }
